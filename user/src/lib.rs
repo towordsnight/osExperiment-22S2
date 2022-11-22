@@ -1,10 +1,6 @@
 #![no_std]
 #![feature(linkage)]
 #![feature(panic_info_message)]
-use syscall::*;
-
-pub fn write(fd: usize, buf: &[u8]) -> isize { sys_write(fd, buf) }
-pub fn exit(exit_code: i32) -> isize { sys_exit(exit_code) }
 
 #[macro_use]
 pub mod console;
@@ -34,3 +30,11 @@ pub extern "C" fn _start() -> ! {
 fn main() -> i32 {
     panic!("Cannot find main!");
 }
+
+
+use syscall::*;
+
+pub fn write(fd: usize, buf: &[u8]) -> isize { sys_write(fd, buf) }
+pub fn exit(exit_code: i32) -> isize { sys_exit(exit_code) }
+pub fn yield_() -> isize { sys_yield() }
+
